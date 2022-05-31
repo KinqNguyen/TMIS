@@ -1,0 +1,15 @@
+D:\TH_Company\New folder\TH_Project\TH_Project.Data\bin\Debug\net5.0\TH_Project.Data.deps.json
+D:\TH_Company\New folder\TH_Project\TH_Project.Data\bin\Debug\net5.0\TH_Project.Data.runtimeconfig.json
+D:\TH_Company\New folder\TH_Project\TH_Project.Data\bin\Debug\net5.0\TH_Project.Data.runtimeconfig.dev.json
+D:\TH_Company\New folder\TH_Project\TH_Project.Data\bin\Debug\net5.0\TH_Project.Data.dll
+D:\TH_Company\New folder\TH_Project\TH_Project.Data\bin\Debug\net5.0\TH_Project.Data.pdb
+D:\TH_Company\New folder\TH_Project\TH_Project.Data\obj\Debug\net5.0\TH_Project.Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\TH_Company\New folder\TH_Project\TH_Project.Data\obj\Debug\net5.0\TH_Project.Data.AssemblyInfoInputs.cache
+D:\TH_Company\New folder\TH_Project\TH_Project.Data\obj\Debug\net5.0\TH_Project.Data.AssemblyInfo.cs
+D:\TH_Company\New folder\TH_Project\TH_Project.Data\obj\Debug\net5.0\TH_Project.Data.csproj.CoreCompileInputs.cache
+D:\TH_Company\New folder\TH_Project\TH_Project.Data\obj\Debug\net5.0\TH_Project.Data.dll
+D:\TH_Company\New folder\TH_Project\TH_Project.Data\obj\Debug\net5.0\ref\TH_Project.Data.dll
+D:\TH_Company\New folder\TH_Project\TH_Project.Data\obj\Debug\net5.0\TH_Project.Data.pdb
+D:\TH_Company\New folder\TH_Project\TH_Project.Data\obj\Debug\net5.0\TH_Project.Data.genruntimeconfig.cache
+D:\TH_Company\New folder\TH_Project\TH_Project.Data\obj\Debug\net5.0\TH_Project.Data.csproj.AssemblyReference.cache
+D:\TH_Company\New folder\TH_Project\TH_Project.Data\obj\Debug\net5.0\refint\TH_Project.Data.dll
