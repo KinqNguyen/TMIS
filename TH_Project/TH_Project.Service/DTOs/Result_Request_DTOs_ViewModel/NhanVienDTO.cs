@@ -43,4 +43,23 @@ namespace TH_Project.Service.DTOs.Result_Request_DTOs_ViewModel
         public Statuses Status { get; set; }
 
     }
+
+    public class NhanVienEdit
+    {
+        public long? IdViTri { get; set; }
+        public long RoleId { get; set; }
+        public string Ho { get; set; }
+        public string Ten { get; set; }
+        public string BietHieu { get; set; }
+        public DateTime? NgaySinh { get; set; }
+        public string DiaChi { get; set; }
+        public string DienThoai { get; set; }
+        public string Slug { get; set; }
+        public DateTime? NgayBatDau { get; set; }
+        public DateTime? NgayNghiViec { get; set; }
+        public string LoginName { get; set; }
+        public string Password { get; set; }
+
+    }
+
 }

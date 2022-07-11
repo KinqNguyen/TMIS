@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Stump.Api.Data.Services;
 using TH_Project.Data;
 using TH_Project.Service.Interface;
 using TH_Project.Service.Services;
@@ -25,6 +26,7 @@ namespace Stump.Api.Configurations
             services.AddTransient<IPhieuGiaoHangService, PhieuGiaoHangService>();
             services.AddTransient<IQuyTienMatService, QuyTienMatService>();
             services.AddTransient<ITaiKhoanNganHangService, TaiKhoanNganHangService>();
+            services.AddScoped<TokenService>();
 
 
 

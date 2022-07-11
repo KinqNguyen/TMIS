@@ -67,7 +67,24 @@ namespace TH_Project.Service.DTOs.Result_Request_DTOs_ViewModel
 
     }
 
-   public class HoaDon_DonHangResult
+    public class HoaDonEdit
+    {
+        public long? IdDonHang { get; set; }
+        public long? IdDatHang { get; set; }
+        public string SoHD { get; set; }
+        public string Slug { get; set; }
+        public int GiaTri { get; set; }
+        public DateTime Ngay { get; set; }
+        public string GhiChu { get; set; }
+        public BillStatuses BillStatus
+        {
+            get; set;
+        }
+
+    }
+
+
+    public class HoaDon_DonHangResult
     {
         public long Id { get; set; }
         public long? IdDonHang { get; set; }

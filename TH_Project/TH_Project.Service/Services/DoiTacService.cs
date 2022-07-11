@@ -171,6 +171,31 @@ namespace TH_Project.Service.Services
         }
 
 
+        public async Task CreateDoiTacAsync(DoiTacEdit args)
+        {
+            
+            var prod = await _context.DatHangs.OrderByDescending(x => x.Id).AsNoTracking().Where(x => x.Status != Statuses.Deleted).FirstOrDefaultAsync();
+            long bro = prod.Id + 1;
+
+            var product = new DoiTac
+            {
+                TenCongTy = args.TenCongTy,
+                MaDoiTac = args.MaDoiTac,
+                SanPhamDichVu = args.SanPhamDichVu,
+                MaSoThue = args.MaSoThue,
+                DienThoai = args.DienThoai,
+                DiaChi = args.DiaChi,
+                Slug = args.Slug,
+
+                GhiChu = args.GhiChu,
+                Status = Statuses.Default,
+            };
+
+            _context.DoiTacs.Add(product);
+
+            await _context.SaveChangesAsync();
+
+        }
 
         //sửa sản phẩm
         public async Task EditAsync(long id, DoiTacEdit args)
@@ -180,21 +205,36 @@ namespace TH_Project.Service.Services
             {
                 throw new InvalidOperationException($"Đơn đặt hàng không tồn tại hoặc đã bị xóa");
             }
-            if (args.IdLoaiDoiTac.HasValue)
-            {
-                // check bảng cha
-                {
-                    var checkCate = _context.LoaiDoiTacs
-                        .AsNoTracking()
-                        .Where(x => x.Id == args.IdLoaiDoiTac && x.Status == Statuses.Default)
-                        .FirstOrDefault();
+            //if (args.IdLoaiDoiTac.HasValue)
+            //{
+            //    // check bảng cha
+            //    {
+            //        var checkCate = _context.LoaiDoiTacs
+            //            .AsNoTracking()
+            //            .Where(x => x.Id == args.IdLoaiDoiTac && x.Status == Statuses.Default)
+            //            .FirstOrDefault();
 
-                    if (checkCate == null)
-                    {
-                        throw new InvalidOperationException($"Không tìm thấy nhân viên");
-                    }
-                }
-            }
+            //        if (checkCate == null)
+            //        {
+            //            throw new InvalidOperationException($"Không tìm thấy loại đối tác");
+            //        }
+            //        var prod_cate = _context.DoiTac_va_LoaiDoiTacs.AsNoTracking().Where(x => x.IdDoiTac == id && x.IdLoaiDoiTac == checkCate.Id).FirstOrDefault();
+            //        if (prod_cate == null)
+            //        {
+            //            var DoiTac_va_LoaiDoiTac = new DoiTac_va_LoaiDoiTac
+            //            {
+            //                IdLoaiDoiTac = args.IdLoaiDoiTac.Value,
+            //                IdDoiTac = id
+            //            };
+            //            _context.DoiTac_va_LoaiDoiTacs.Add(DoiTac_va_LoaiDoiTac);
+            //            await _context.SaveChangesAsync();
+            //        }
+            //        prod_cate.IdLoaiDoiTac = args.IdLoaiDoiTac.Value;
+            //        _context.Entry(checkCate).State = EntityState.Modified;
+            //        await _context.SaveChangesAsync();
+            //    }
+
+            //}
 
 
 

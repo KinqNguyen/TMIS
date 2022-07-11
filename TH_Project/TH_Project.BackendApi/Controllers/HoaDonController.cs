@@ -71,5 +71,43 @@ namespace TH_Project.BackendApi.Controllers
             return await _donHangService.getAllHoaDon_DonHangPaging(request, getNotification);
         }
 
+
+
+
+
+        [HttpPost]
+        [Route("edit")]
+        [DisableRequestSizeLimit]
+        public async Task EditProductAsync(long id, [FromForm] HoaDonEdit args)
+        {
+            await _donHangService.EditAsync(id, args);
+        }
+
+
+
+
+        [HttpPost]
+        [Route("create")]
+        [DisableRequestSizeLimit]
+        public async Task<long> CreateProductAsync([FromForm] HoaDonEdit args)
+        {
+
+            return await _donHangService.CreateAsync(args);
+
+
+            //string imagePath = args.image != null ? this.env.SaveFile(args.image) : null;
+            //string videoPath = args.video != null ? this.env.SaveFile(args.video) : null;
+
+            //await productService.CreateAsync(new CreateProductArgs
+            //{
+            //    Name = args.name,
+            //    Description = args.description,
+            //    CategoryID = args.categoryId,
+            //    ImagePath = imagePath,
+            //    VideoPath = videoPath,
+            //    UnitPrice = args.unitPrice,
+            //});
+        }
+
     }
 }

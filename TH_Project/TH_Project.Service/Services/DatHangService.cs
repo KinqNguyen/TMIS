@@ -183,6 +183,68 @@ namespace TH_Project.Service.Services
 
 
 
+        public async Task CreateDoiTacAsync(DatHangCreate args)
+        {
+            {
+                // check hóa đơn
+                {
+                    var checkCate = _context.DoiTacs
+                        .AsNoTracking()
+                        .Where(x => x.Id == args.IdDoiTac && x.Status == Statuses.Default)
+                        .FirstOrDefault();
+
+                    if (checkCate == null)
+                    {
+                        throw new InvalidOperationException($"Không tìm thấy Doi Tac ");
+                    }
+                }
+            }
+
+            {
+                // check hóa đơn
+                {
+                    var checkCate = _context.NhanViens
+                        .AsNoTracking()
+                        .Where(x => x.Id == args.IdNhanVien && x.Status == Statuses.Default)
+                        .FirstOrDefault();
+
+                    if (checkCate == null)
+                    {
+                        throw new InvalidOperationException($"Không tìm thấy Nhan Vien ");
+                    }
+                }
+            }
+            var prod = await  _context.DatHangs.OrderByDescending(x=> x.Id).AsNoTracking().Where(x => x.Status != Statuses.Deleted).FirstOrDefaultAsync();
+            long bro = prod.Id + 1;
+
+            var product = new DatHang
+            {
+                IdDoiTac = args.IdDoiTac.Value,
+                IdNhanVien = args.IdNhanVien.Value,
+                    MaDonHang = "ORD_0000_" + bro,
+                TenCongTrinh = args.TenCongTrinh,
+                NoiDung = args.NoiDung,
+                GiaTri = args.GiaTri.Value,
+                NgayBatDau = args.NgayBatDau,
+                Slug = args.Slug,
+                NgayGiaoHang = args.NgayGiaoHang,
+                NgayToiHan = args.NgayToiHan,
+                GhiChu = args.GhiChu,
+                Status = Statuses.Default,
+                TrangThai = args.TrangThai.Value,
+            };
+
+            _context.DatHangs.Add(product);
+
+            await _context.SaveChangesAsync();
+
+        }
+
+
+
+
+
+
         //sửa sản phẩm
         public async Task EditAsync(long id, DatHangEdit args)
         {
@@ -250,10 +312,12 @@ namespace TH_Project.Service.Services
             { product.GhiChu = args.GhiChu; }
 
             //update query for int 
-            if (args.GiaTri != null) { product.GiaTri = args.GiaTri; }
+            if (args.GiaTri != null) { product.GiaTri = args.GiaTri.Value; }
+            if (args.IdNhanVien != null) { product.IdNhanVien = args.IdNhanVien.Value; }
+            if (args.IdDoiTac != null) { product.IdDoiTac = args.IdDoiTac.Value; }
             if (args.NgayBatDau.HasValue) { product.NgayBatDau = args.NgayBatDau.Value; }
             if (args.NgayGiaoHang.HasValue) { product.NgayGiaoHang = args.NgayGiaoHang.Value; }
-            if (args.TrangThai != null) { product.TrangThai = args.TrangThai; }
+            if (args.TrangThai != null) { product.TrangThai = args.TrangThai.Value; }
 
             // update kể cả khi request truyền null 
             _context.Entry(product).State = EntityState.Modified;

@@ -251,7 +251,7 @@ namespace TH_Project.Service.Services
 
                     if (checkCate == null)
                     {
-                        throw new InvalidOperationException($"Không tìm thấy loại sản phẩm");
+                        throw new InvalidOperationException($"Không tìm thấy hóa đơn");
                     }
                 }
             }
@@ -285,10 +285,11 @@ namespace TH_Project.Service.Services
             { product.GhiChu = args.GhiChu; }
 
             //update query for int 
-            if (args.GiaTri != null ) { product.GiaTri = args.GiaTri; }
+            if (args.GiaTri != null ) { product.GiaTri = args.GiaTri.Value; }
+            if (args.IdHoaDon != null ) { product.IdHoaDon = args.IdHoaDon.Value; }
             if (args.NgayToiHan.HasValue) { product.NgayToiHan = args.NgayToiHan.Value; }
             if (args.NgayKetThuc.HasValue) { product.NgayKetThuc = args.NgayKetThuc.Value; }
-            if (args.TrangThai != null ) { product.TrangThai = args.TrangThai; }
+            if (args.TrangThai != null ) { product.TrangThai = args.TrangThai.Value; }
 
             // update kể cả khi request truyền null 
             _context.Entry(product).State = EntityState.Modified;

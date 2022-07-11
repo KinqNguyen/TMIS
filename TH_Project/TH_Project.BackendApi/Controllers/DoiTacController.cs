@@ -30,6 +30,16 @@ namespace TH_Project.BackendApi.Controllers
             await _donHangService.DeleteAsync(productid);
         }
 
+        [HttpPost]
+        [Route("edit")]
+        [DisableRequestSizeLimit]
+        public async Task EditProductAsync(long id, [FromForm] DoiTacEdit args)
+        {
+            await _donHangService.EditAsync(id, args);
+        }
+
+
+
         [HttpGet]
         [Route("all")]
         public async Task<PagedResult<DoiTacResult>> GetProductAsync([FromQuery] DoiTacRequest request)

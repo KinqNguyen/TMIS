@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6sx8YkeNV28GOOsnfgbAQp1eY7TEb+qZV67aHlRZb7eKMVzXD2Y5Yrf+d3RW2SCLOn0pFY4u2FXYrLGHoOcMNQ==",
+  "dgSpecHash": "XA1NHQ8qLvjSS6OcM8KEVkVa+bSVbgP8q6K1nS1Y6LouGgteBEOJ+dSezZ80gqGdLZLzY28dZJHUQPwH45tGpQ==",
   "success": true,
-  "projectFilePath": "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.Data\\TH_Project.Data.csproj",
+  "projectFilePath": "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.Data\\TH_Project.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

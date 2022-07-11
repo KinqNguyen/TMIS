@@ -32,8 +32,8 @@ namespace TH_Project.Data.Tables
         public string NoiDung { get; set; }
 
         [Required]
-        [Range(0, int.MaxValue)]
-        public int GiaTri { get; set; }
+        [Range(0, long.MaxValue)]
+        public long GiaTri { get; set; }
 
         [Required]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]

@@ -12,5 +12,9 @@ namespace TH_Project.Service.Services
     {
         Task<PagedResult<DatHangResult>> getAllDatHangPaging(DatHangRequest request, string getNotification);
         Task DeleteAsync(long productid);
+        Task CreateDoiTacAsync(DatHangCreate args);
+        Task EditAsync(long id, DatHangEdit args);
+        Task<DatHangResult> GetDatHangAsync(long productid);
+
     }
 }

@@ -40,6 +40,82 @@ namespace TH_Project.Service.Services
             return await _context.TaiKhoanNganHangs.AsNoTracking().Where(x => x.Status != Statuses.Deleted && x.Id == id).FirstOrDefaultAsync();
         }
 
+        public async Task EditAsync(long id, TaiKhoanNganHangEdit args)
+        {
+            var product = await FetchAsync(id);
+            if (product == null)
+            {
+                throw new InvalidOperationException($"QTM này không tồn tại trong CSDL hoặc đã bị xóa");
+            }
+            if (args.IdNhanVIen.HasValue)
+            {
+                // check bảng cha
+                {
+                    var checkCate = _context.NhanViens
+                        .AsNoTracking()
+                        .Where(x => x.Id == args.IdNhanVIen && x.Status != Statuses.Deleted)
+                        .FirstOrDefault();
+
+                    if (checkCate == null)
+                    {
+                        throw new InvalidOperationException($"Không tìm thấy nhân viên");
+                    }
+                }
+            }
+            if (args.IdDoiTac.HasValue)
+            {
+                // check bảng cha
+                {
+                    var checkCate = _context.DoiTacs
+                        .AsNoTracking()
+                        .Where(x => x.Id == args.IdDoiTac && x.Status != Statuses.Deleted)
+                        .FirstOrDefault();
+
+                    if (checkCate == null)
+                    {
+                        throw new InvalidOperationException($"Không tìm thấy doi tac");
+                    }
+                }
+            }
+
+
+            //if (!string.IsNullOrEmpty(args.ImagePath) || !string.IsNullOrWhiteSpace(args.ImagePath))
+            //{ product.ImagePath = args.ImagePath; }
+
+            //if (!string.IsNullOrEmpty(args.VideoPath) || !string.IsNullOrWhiteSpace(args.VideoPath))
+            //{ product.VideoPath = args.VideoPath; }
+
+            // update query for string
+
+
+            if (!string.IsNullOrEmpty(args.Slug) || !string.IsNullOrWhiteSpace(args.Slug))
+            { product.Slug = args.Slug; }
+            if (!string.IsNullOrEmpty(args.STK) || !string.IsNullOrWhiteSpace(args.STK))
+            { product.STK = args.STK; }
+            if (!string.IsNullOrEmpty(args.Ten) || !string.IsNullOrWhiteSpace(args.Ten))
+            { product.Ten = args.Ten; }
+            if (!string.IsNullOrEmpty(args.DiaChiNH) || !string.IsNullOrWhiteSpace(args.DiaChiNH))
+            { product.DiaChiNH = args.DiaChiNH; }
+            if (!string.IsNullOrEmpty(args.GhiChu) || !string.IsNullOrWhiteSpace(args.GhiChu))
+            { product.GhiChu = args.GhiChu; }
+
+
+            //update query for int 
+            if (args.IdNhanVIen != null) { product.IdNhanVIen = args.IdNhanVIen.Value; }
+            if (args.IdDoiTac != null) { product.IdDoiTac = args.IdDoiTac.Value; }
+
+
+
+            // update kể cả khi request truyền null 
+            _context.Entry(product).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            //await versionService.NewVersion(ObjectVersions.Product, product.Id);
+
+
+
+        }
+
 
 
         public async Task<TaiKhoanNganHangNhanVienResult> GetTKNHNhanVienAsync(long productid)

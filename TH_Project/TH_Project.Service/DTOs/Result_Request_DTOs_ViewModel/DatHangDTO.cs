@@ -38,6 +38,25 @@ namespace TH_Project.Service.DTOs.Result_Request_DTOs_ViewModel
         public Statuses Status { get; set; }
     }
 
+
+    public class DatHangCreate
+    {
+        public long? IdDoiTac { get; set; }
+        public long? IdNhanVien { get; set; }
+        public string TenCongTrinh { get; set; }
+        public string NoiDung { get; set; }
+        public int? GiaTri { get; set; }
+        public DateTime? NgayBatDau { get; set; }
+        public DateTime? NgayToiHan { get; set; }
+        
+        public string Slug { get; set; }
+
+        public DateTime? NgayGiaoHang { get; set; }
+        public string GhiChu { get; set; }
+        public OrderStatuses? TrangThai { get; set; }
+
+    }
+
     public class DatHangEdit
     {
         public long? IdDoiTac { get; set; }
@@ -46,12 +65,12 @@ namespace TH_Project.Service.DTOs.Result_Request_DTOs_ViewModel
 
         public string TenCongTrinh { get; set; }
         public string NoiDung { get; set; }
-        public int GiaTri { get; set; }
+        public int? GiaTri { get; set; }
         public DateTime? NgayBatDau { get; set; }
         public string Slug { get; set; }
 
         public DateTime? NgayGiaoHang { get; set; }
         public string GhiChu { get; set; }
-        public OrderStatuses TrangThai { get; set; }
+        public OrderStatuses? TrangThai { get; set; }
     }
 }

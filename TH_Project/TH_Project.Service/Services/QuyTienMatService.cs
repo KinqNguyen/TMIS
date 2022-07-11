@@ -101,6 +101,80 @@ namespace TH_Project.Service.Services
         //}
 
 
+        public async Task EditAsync(long id, QuyTienMatEdit args)
+        {
+            var product = await FetchAsync(id);
+            if (product == null)
+            {
+                throw new InvalidOperationException($"QTM này không tồn tại trong CSDL hoặc đã bị xóa");
+            }
+            if (args.IdNhanVien.HasValue)
+            {
+                // check bảng cha
+                {
+                    var checkCate = _context.NhanViens
+                        .AsNoTracking()
+                        .Where(x => x.Id == args.IdNhanVien && x.Status != Statuses.Deleted)
+                        .FirstOrDefault();
+
+                    if (checkCate == null)
+                    {
+                        throw new InvalidOperationException($"Không tìm thấy nhân viên");
+                    }
+                }
+            }
+            if (args.IdHoaDon.HasValue)
+            {
+                // check bảng cha
+                {
+                    var checkCate = _context.HoaDons
+                        .AsNoTracking()
+                        .Where(x => x.Id == args.IdHoaDon && x.Status != Statuses.Deleted)
+                        .FirstOrDefault();
+
+                    if (checkCate == null)
+                    {
+                        throw new InvalidOperationException($"Không tìm thấy hóa đơn");
+                    }
+                }
+            }
+
+
+            //if (!string.IsNullOrEmpty(args.ImagePath) || !string.IsNullOrWhiteSpace(args.ImagePath))
+            //{ product.ImagePath = args.ImagePath; }
+
+            //if (!string.IsNullOrEmpty(args.VideoPath) || !string.IsNullOrWhiteSpace(args.VideoPath))
+            //{ product.VideoPath = args.VideoPath; }
+
+            // update query for string
+
+
+            if (!string.IsNullOrEmpty(args.Slug) || !string.IsNullOrWhiteSpace(args.Slug))
+            { product.Slug = args.Slug; }
+            if (!string.IsNullOrEmpty(args.NoiDung) || !string.IsNullOrWhiteSpace(args.NoiDung))
+            { product.NoiDung = args.NoiDung; }
+
+
+
+            //update query for int 
+            if (args.IdHoaDon != null) { product.IdHoaDon = args.IdHoaDon.Value; }
+            if (args.IdNhanVien != null) { product.IdNhanVien = args.IdNhanVien.Value; }
+            if (args.IOStatuses != null) { product.IOStatuses = args.IOStatuses; }
+
+
+
+            // update kể cả khi request truyền null 
+            _context.Entry(product).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            //await versionService.NewVersion(ObjectVersions.Product, product.Id);
+
+
+
+        }
+
+
+
 
 
         public async Task<PagedResult<QuyTienMatResult>> getAllQuyTienMatPaging(QuyTienMatRequest request)

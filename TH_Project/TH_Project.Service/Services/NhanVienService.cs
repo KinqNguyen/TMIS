@@ -1,4 +1,5 @@
 ﻿using SscKiosk.Kitchen.Api.Data.Utils;
+using Stump.Api.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -63,6 +64,111 @@ namespace TH_Project.Service.Services
                 Status = item.Status
 
             };
+        }
+
+        //sửa sản phẩm
+        public async Task EditAsync(long id, NhanVienEdit args)
+        {
+            var product = await FetchAsync(id);
+            if (product == null)
+            {
+                throw new InvalidOperationException($"Nhân viên này không tồn tại trong CSDL hoặc đã bị xóa");
+            }
+            if (args.IdViTri.HasValue)
+            {
+                // check bảng cha
+                {
+                    var checkCate = _context.ViTriNhanViens
+                        .AsNoTracking()
+                        .Where(x => x.Id == args.IdViTri)
+                        .FirstOrDefault();
+
+                    if (checkCate == null)
+                    {
+                        throw new InvalidOperationException($"Không tìm thấy nhân viên");
+                    }
+                }
+            }
+
+
+            //if (!string.IsNullOrEmpty(args.ImagePath) || !string.IsNullOrWhiteSpace(args.ImagePath))
+            //{ product.ImagePath = args.ImagePath; }
+
+            //if (!string.IsNullOrEmpty(args.VideoPath) || !string.IsNullOrWhiteSpace(args.VideoPath))
+            //{ product.VideoPath = args.VideoPath; }
+
+            // update query for string
+
+
+            if (!string.IsNullOrEmpty(args.Ho) || !string.IsNullOrWhiteSpace(args.Ho))
+            { product.Ho = args.Ho; }
+            if (!string.IsNullOrEmpty(args.Ten) || !string.IsNullOrWhiteSpace(args.Ten))
+            { product.Ten = args.Ten; }
+            if (!string.IsNullOrEmpty(args.BietHieu) || !string.IsNullOrWhiteSpace(args.BietHieu))
+            { product.BietHieu = args.BietHieu; }
+            if (!string.IsNullOrEmpty(args.DiaChi) || !string.IsNullOrWhiteSpace(args.DiaChi))
+            { product.DiaChi = args.DiaChi; }
+            if (!string.IsNullOrEmpty(args.DienThoai) || !string.IsNullOrWhiteSpace(args.DienThoai))
+            { product.DienThoai = args.DienThoai; }
+            if (!string.IsNullOrEmpty(args.LoginName) || !string.IsNullOrWhiteSpace(args.LoginName))
+            { product.LoginName = args.LoginName; }
+            if (!string.IsNullOrEmpty(args.Password) || !string.IsNullOrWhiteSpace(args.Password))
+            { product.Password = args.Password.ToSha256(); }
+
+
+            //update query for int 
+            if (args.IdViTri != null) { product.IdViTri = args.IdViTri.Value; }
+            if (args.RoleId != null) { product.RoleId = args.RoleId; }
+            if (args.NgaySinh != null) { product.NgaySinh = args.NgaySinh; }
+            if (args.NgayBatDau != null) { product.NgayBatDau = args.NgayBatDau.Value; }
+            if (args.NgayNghiViec != null) { product.NgayNghiViec = args.NgayNghiViec; }
+
+
+            // update kể cả khi request truyền null 
+            _context.Entry(product).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            //await versionService.NewVersion(ObjectVersions.Product, product.Id);
+
+
+
+        }
+
+        public async Task<long> CreateAsync(NhanVienEdit args)
+        {
+
+
+            var checkProd = await _context.NhanViens.Where(x => x.LoginName == args.LoginName).FirstOrDefaultAsync();
+            if (checkProd != null)
+            {
+
+                throw new InvalidOperationException($"Đã tồn tại tên đăng nhập có mã là :  {args.LoginName}");
+            }
+
+            var product = new NhanVien
+            {
+                IdViTri = args.IdViTri.Value,
+                RoleId = args.RoleId,
+                Ho = args.Ho,
+                Ten = args.Ten,
+                BietHieu = args.BietHieu,
+                NgaySinh = args.NgaySinh.Value,
+                DiaChi = args.DiaChi,
+                DienThoai = args.DienThoai,
+                Slug = args.Slug,
+                NgayBatDau = args.NgayBatDau.Value,
+                NgayNghiViec = args.NgayNghiViec.Value,
+                LoginName = args.LoginName,
+                Password = args.Password.ToSha256(),
+                Status = Statuses.Default,
+            };
+
+            _context.NhanViens.Add(product);
+
+            await _context.SaveChangesAsync();
+
+
+            return product.Id;
         }
 
 

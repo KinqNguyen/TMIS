@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TH_Project.BackendApi.Controllers.Middlewares;
+using TH_Project.BackendApi.Middlewares;
 using TH_Project.Service.Interface;
 using TH_Project.Service.Services;
 
@@ -42,11 +43,15 @@ builder =>
 
             services.ConfigureDatabase(Configuration);
             services.AddControllers();
+            services.ConfigAuth(Configuration);
+
             services.AddMemoryCache();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TH_Project.BackendApi", Version = "v1" });
-            });
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "TH_Project.BackendApi", Version = "v1" });
+            //});
+            services.ConfigSwagger();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,8 +68,10 @@ builder =>
 
             app.UseRouting();
             app.UseCors("CorsPolicy");
-
+            app.UseAuthentication();
+            app.UseMiddleware<AuthMiddleware>();
             app.UseAuthorization();
+            app.ConfigureErrorResponse();
             app.UseResponseParser();
 
             app.UseEndpoints(endpoints =>

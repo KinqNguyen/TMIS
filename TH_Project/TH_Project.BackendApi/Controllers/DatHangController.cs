@@ -42,5 +42,48 @@ namespace TH_Project.BackendApi.Controllers
             return await _donHangService.getAllDatHangPaging(request, getNotification);
         }
 
+        [HttpPost]
+        [Route("create")]
+        public async Task CreateProductAsync([FromForm] DatHangCreate args)
+        {
+
+             await _donHangService.CreateDoiTacAsync(args);
+
+
+            //string imagePath = args.image != null ? this.env.SaveFile(args.image) : null;
+            //string videoPath = args.video != null ? this.env.SaveFile(args.video) : null;
+
+            //await productService.CreateAsync(new CreateProductArgs
+            //{
+            //    Name = args.name,
+            //    Description = args.description,
+            //    CategoryID = args.categoryId,
+            //    ImagePath = imagePath,
+            //    VideoPath = videoPath,
+            //    UnitPrice = args.unitPrice,
+            //});
+        }
+
+
+
+        [HttpGet]
+        [Route("detail")]
+        public async Task<DatHangResult> GetChiTietCongNoAsync(long id)
+        {
+            return await _donHangService.GetDatHangAsync(id);
+        }
+
+        [HttpPost]
+        [Route("edit")]
+        [DisableRequestSizeLimit]
+        public async Task EditProductAsync(long id, [FromForm] DatHangEdit args)
+        {
+            await _donHangService.EditAsync(id, args);
+        }
+
+
+
+
+
     }
 }

@@ -21,9 +21,9 @@ namespace Stump.Api.Controllers.Admin
         private readonly TH_DbConotext context;
         private readonly TokenService tokenService;
         private readonly IConfiguration configuration;
-        private readonly NhanVienService employeeService;
+        private readonly INhanVienService employeeService;
 
-        public AuthController(TH_DbConotext dbContext, IConfiguration configuration, TokenService tokenService, NhanVienService employeeService)
+        public AuthController(TH_DbConotext dbContext, IConfiguration configuration, TokenService tokenService, INhanVienService employeeService)
         {
             this.context = dbContext;
             this.configuration = configuration;

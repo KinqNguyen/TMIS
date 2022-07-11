@@ -100,6 +100,225 @@ namespace TH_Project.Service.Services
         }
 
 
+        //sửa sản phẩm
+        public async Task EditDoiTacAsync(long id, DanhBaDoiTacEdit args)
+        {
+            var product = await FetchDoiTacAsync(id);
+            if (product == null)
+            {
+                throw new InvalidOperationException($"Đối tác không tồn tại hoặc đã bị xóa");
+            }
+            if (args.IdDoiTac.HasValue)
+            {
+                // check bảng cha
+                {
+                    var checkCate = _context.DoiTacs
+                        .AsNoTracking()
+                        .Where(x => x.Id == args.IdDoiTac && x.Status == Statuses.Default)
+                        .FirstOrDefault();
+
+                    if (checkCate == null)
+                    {
+                        throw new InvalidOperationException($"Không tìm thấy Doi Tác");
+                    }
+                }
+            }
+
+
+
+            //if (!string.IsNullOrEmpty(args.ImagePath) || !string.IsNullOrWhiteSpace(args.ImagePath))
+            //{ product.ImagePath = args.ImagePath; }
+
+            //if (!string.IsNullOrEmpty(args.VideoPath) || !string.IsNullOrWhiteSpace(args.VideoPath))
+            //{ product.VideoPath = args.VideoPath; }
+
+            // update query for string
+            if (!string.IsNullOrEmpty(args.DiDong) || !string.IsNullOrWhiteSpace(args.DiDong))
+            {
+                var checkProd = await _context.DanhBaDoiTacs.Where(x => x.DiDong == args.DiDong && x.Id != id).FirstOrDefaultAsync();
+                if (checkProd != null)
+                {
+                    throw new InvalidOperationException($"Đã tồn tại SDT :  {args.DiDong}");
+                }
+                product.DiDong = args.DiDong;
+            }
+
+            if (!string.IsNullOrEmpty(args.XungHo) || !string.IsNullOrWhiteSpace(args.XungHo))
+            { product.XungHo = args.XungHo; }
+            if (!string.IsNullOrEmpty(args.Ho) || !string.IsNullOrWhiteSpace(args.Ho))
+            { product.Ho = args.Ho; }///
+            if (!string.IsNullOrEmpty(args.Ten) || !string.IsNullOrWhiteSpace(args.Ten))
+            { product.Slug = args.Ten; }
+            if (!string.IsNullOrEmpty(args.Mail) || !string.IsNullOrWhiteSpace(args.Mail))
+            { product.Mail = args.Mail; }
+            if (!string.IsNullOrEmpty(args.ChucVu) || !string.IsNullOrWhiteSpace(args.ChucVu))
+            { product.GhiChu = args.ChucVu; }
+            if (!string.IsNullOrEmpty(args.GhiChu) || !string.IsNullOrWhiteSpace(args.GhiChu))
+            { product.GhiChu = args.GhiChu; }
+            //update query for int 
+            if (args.IdDoiTac != null) { product.IdDoiTac = args.IdDoiTac.Value; }
+
+            // update kể cả khi request truyền null 
+            _context.Entry(product).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            //await versionService.NewVersion(ObjectVersions.Product, product.Id);
+
+
+
+        }
+
+
+
+        //sửa sản phẩm
+        public async Task EditNhanVienAsync(long id, DanhBaNhanVienEdit args)
+        {
+            var product = await FetchNhanVienAsync(id);
+            if (product == null)
+            {
+                throw new InvalidOperationException($"Đối tác không tồn tại hoặc đã bị xóa");
+            }
+            if (args.IdNhanVien.HasValue)
+            {
+                // check bảng cha
+                {
+                    var checkCate = _context.NhanViens
+                        .AsNoTracking()
+                        .Where(x => x.Id == args.IdNhanVien && x.Status == Statuses.Default)
+                        .FirstOrDefault();
+
+                    if (checkCate == null)
+                    {
+                        throw new InvalidOperationException($"Không tìm thấy Doi Tác");
+                    }
+                }
+            }
+
+
+
+            //if (!string.IsNullOrEmpty(args.ImagePath) || !string.IsNullOrWhiteSpace(args.ImagePath))
+            //{ product.ImagePath = args.ImagePath; }
+
+            //if (!string.IsNullOrEmpty(args.VideoPath) || !string.IsNullOrWhiteSpace(args.VideoPath))
+            //{ product.VideoPath = args.VideoPath; }
+
+            // update query for string
+            if (!string.IsNullOrEmpty(args.DiDong) || !string.IsNullOrWhiteSpace(args.DiDong))
+            {
+                var checkProd = await _context.DanhBaNhanViens.Where(x => x.DiDong == args.DiDong && x.Id != id).FirstOrDefaultAsync();
+                if (checkProd != null)
+                {
+                    throw new InvalidOperationException($"Đã tồn tại SDT :  {args.DiDong}");
+                }
+                product.DiDong = args.DiDong;
+            }
+
+            if (!string.IsNullOrEmpty(args.Mail) || !string.IsNullOrWhiteSpace(args.Mail))
+            { product.Mail = args.Mail; }
+            if (!string.IsNullOrEmpty(args.Slug) || !string.IsNullOrWhiteSpace(args.Slug))
+            { product.Mail = args.Slug; }
+            if (!string.IsNullOrEmpty(args.GhiChu) || !string.IsNullOrWhiteSpace(args.GhiChu))
+            { product.GhiChu = args.GhiChu; }
+            //update query for int 
+            if (args.IdNhanVien != null) { product.IdNhanVien = args.IdNhanVien.Value; }
+
+            // update kể cả khi request truyền null 
+            _context.Entry(product).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            //await versionService.NewVersion(ObjectVersions.Product, product.Id);
+
+
+
+        }
+
+
+        public async Task<long> CreateNhanVienAsync(DanhBaNhanVienCreate args)
+        {
+            {
+                // check hóa đơn
+                {
+                    var checkCate = _context.NhanViens
+                        .AsNoTracking()
+                        .Where(x => x.Id == args.IdNhanVien && x.Status == Statuses.Default)
+                        .FirstOrDefault();
+
+                    if (checkCate == null)
+                    {
+                        throw new InvalidOperationException($"Không tìm thấy nhân vien ");
+                    }
+                }
+            }
+
+            var checkProd = await _context.DanhBaNhanViens.Where(x => x.DiDong == args.DiDong).FirstOrDefaultAsync();
+            if (checkProd != null)
+            {
+                throw new InvalidOperationException($"Đã tồn tại SDT :  {args.DiDong}");
+            }
+
+            var product = new DanhBaNhanVien
+            {
+                IdNhanVien = args.IdNhanVien.Value,
+                Mail = args.Mail,
+                GhiChu = args.GhiChu,
+                DiDong = args.DiDong,
+                Slug = args.Slug,
+                Status = Statuses.Default,
+            };
+
+            _context.DanhBaNhanViens.Add(product);
+
+            await _context.SaveChangesAsync();
+
+
+            return product.Id;
+        }
+
+
+        public async Task<long> CreateDoiTacAsync(DanhBaDoiTacCreate args)
+        {
+            {
+                // check hóa đơn
+                {
+                    var checkCate = _context.DoiTacs
+                        .AsNoTracking()
+                        .Where(x => x.Id == args.IdDoiTac && x.Status == Statuses.Default)
+                        .FirstOrDefault();
+
+                    if (checkCate == null)
+                    {
+                        throw new InvalidOperationException($"Không tìm thấy Doi Tac ");
+                    }
+                }
+            }
+
+            var checkProd = await _context.DanhBaDoiTacs.Where(x => x.DiDong == args.DiDong).FirstOrDefaultAsync();
+            if (checkProd != null)
+            {
+                throw new InvalidOperationException($"Đã tồn tại SDT :  {args.DiDong}");
+            }
+
+            var product = new DanhBaDoiTac
+            {
+                IdDoiTac = args.IdDoiTac.Value,
+                XungHo = args.XungHo,
+                Ho = args.Ho,
+                Ten = args.Ten,
+                ChucVu = args.ChucVu,
+                GhiChu = args.GhiChu,
+                Slug = args.Slug,
+                Mail = args.Mail,
+                DiDong = args.DiDong,
+                Status = Statuses.Default,
+            };
+
+            _context.DanhBaDoiTacs.Add(product);
+
+            await _context.SaveChangesAsync();
+
+
+            return product.Id;
+        }
 
 
 

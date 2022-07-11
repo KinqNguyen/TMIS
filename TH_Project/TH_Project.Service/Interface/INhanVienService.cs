@@ -12,5 +12,9 @@ namespace TH_Project.Service.Services
     {
         Task<PagedResult<NhanVienResult>> getAllNhanVienPaging(NhanVienRequest request);
         Task DeleteAsync(long productid);
+        Task<NhanVienResult> GetNhanVienAsync(long productid);
+
+        Task EditAsync(long id, NhanVienEdit args);
+        Task<long> CreateAsync(NhanVienEdit args);
     }
 }

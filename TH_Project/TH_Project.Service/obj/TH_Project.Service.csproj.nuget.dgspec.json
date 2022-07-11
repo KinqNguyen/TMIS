@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.Service\\TH_Project.Service.csproj": {}
+    "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.Service\\TH_Project.Service.csproj": {}
   },
   "projects": {
-    "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.Data\\TH_Project.Data.csproj": {
+    "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.Data\\TH_Project.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.Data\\TH_Project.Data.csproj",
+        "projectUniqueName": "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.Data\\TH_Project.Data.csproj",
         "projectName": "TH_Project.Data",
-        "projectPath": "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.Data\\TH_Project.Data.csproj",
+        "projectPath": "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.Data\\TH_Project.Data.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.Data\\obj\\",
+        "outputPath": "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -64,14 +64,14 @@
         }
       }
     },
-    "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.Service\\TH_Project.Service.csproj": {
+    "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.Service\\TH_Project.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.Service\\TH_Project.Service.csproj",
+        "projectUniqueName": "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.Service\\TH_Project.Service.csproj",
         "projectName": "TH_Project.Service",
-        "projectPath": "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.Service\\TH_Project.Service.csproj",
+        "projectPath": "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.Service\\TH_Project.Service.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.Service\\obj\\",
+        "outputPath": "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -88,8 +88,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.Data\\TH_Project.Data.csproj": {
-                "projectPath": "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.Data\\TH_Project.Data.csproj"
+              "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.Data\\TH_Project.Data.csproj": {
+                "projectPath": "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.Data\\TH_Project.Data.csproj"
               }
             }
           }
@@ -124,7 +124,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

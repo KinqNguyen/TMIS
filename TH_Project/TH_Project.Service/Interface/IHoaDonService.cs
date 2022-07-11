@@ -15,6 +15,8 @@ namespace TH_Project.Service.Interface
         Task<PagedResult<HoaDonResult>> getAllHoaDon_DatHangPaging(HoaDonRequest request, string getNotification);
         Task<PagedResult<HoaDonResult>> getAllHoaDon_DonHangPaging(HoaDonRequest request, string getNotification);
         Task<List<HoaDonResult>> GetAsync();
+        Task<long> CreateAsync(HoaDonEdit args);
+        Task EditAsync(long id, HoaDonEdit args);
         Task<HoaDonResult> GetAsync(long productid);
         Task DeleteAsync(long productid);
     }

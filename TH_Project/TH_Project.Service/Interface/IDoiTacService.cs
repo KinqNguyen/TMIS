@@ -12,5 +12,9 @@ namespace TH_Project.Service.Services
     {
         Task<PagedResult<DoiTacResult>> getAllDoiTacPaging(DoiTacRequest request);
         Task DeleteAsync(long productid);
+        Task EditAsync(long id, DoiTacEdit args);
+        Task CreateDoiTacAsync(DoiTacEdit args);
+        Task<DoiTacResult> GetDoitacAsync(long productid);
+
     }
 }

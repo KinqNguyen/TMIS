@@ -12,5 +12,8 @@ namespace TH_Project.Service.Interface
     {
         Task<PagedResult<DonHangResult>> getAllDonHangPaging(DonHangRequest request, string getNotification);
         Task DeleteAsync(long productid);
+        Task EditAsync(long id, DonHangEdit args);
+        Task CreateDoiTacAsync(DonHangEdit args);
+        Task<DonHangResult> GetDonHangAsync(long productid);
     }
 }

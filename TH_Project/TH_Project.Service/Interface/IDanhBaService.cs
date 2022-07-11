@@ -16,5 +16,11 @@ namespace TH_Project.Service.Services
         Task<DanhBaResult> GetNhanVienAsync(long productid);
         Task DeleteDoiTacAsync(long productid);
         Task DeleteNhanVienAsync(long productid);
+
+        Task EditNhanVienAsync(long id, DanhBaNhanVienEdit args);
+        Task EditDoiTacAsync(long id, DanhBaDoiTacEdit args);
+
+        Task<long> CreateNhanVienAsync(DanhBaNhanVienCreate args);
+        Task<long> CreateDoiTacAsync(DanhBaDoiTacCreate args);
     }
 }

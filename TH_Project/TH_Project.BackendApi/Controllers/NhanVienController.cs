@@ -30,6 +30,15 @@ namespace TH_Project.BackendApi.Controllers
             await _donHangService.DeleteAsync(productid);
         }
 
+        [HttpPost]
+        [Route("edit")]
+        [DisableRequestSizeLimit]
+        public async Task EditProductAsync(long id, [FromForm] NhanVienEdit args)
+        {
+            await _donHangService.EditAsync(id, args);
+        }
+
+
 
         [HttpGet]
         [Route("all")]
@@ -41,6 +50,37 @@ namespace TH_Project.BackendApi.Controllers
             //    await dbContext.CheckPermissionAsync(1, long.Parse(userID)); // 1 - xem
             //} 
             return await _donHangService.getAllNhanVienPaging(request);
+        }
+
+
+        [HttpGet]
+        [Route("detail")]
+        public async Task<NhanVienResult> GetChiTietCongNoAsync(long id)
+        {
+            return await _donHangService.GetNhanVienAsync(id);
+        }
+
+
+        [HttpPost]
+        [Route("create")]
+        public async Task<long> CreateProductAsync([FromForm] NhanVienEdit args)
+        {
+
+            return await _donHangService.CreateAsync(args);
+
+
+            //string imagePath = args.image != null ? this.env.SaveFile(args.image) : null;
+            //string videoPath = args.video != null ? this.env.SaveFile(args.video) : null;
+
+            //await productService.CreateAsync(new CreateProductArgs
+            //{
+            //    Name = args.name,
+            //    Description = args.description,
+            //    CategoryID = args.categoryId,
+            //    ImagePath = imagePath,
+            //    VideoPath = videoPath,
+            //    UnitPrice = args.unitPrice,
+            //});
         }
 
     }

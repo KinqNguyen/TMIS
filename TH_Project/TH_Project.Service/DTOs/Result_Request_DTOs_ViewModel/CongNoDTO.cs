@@ -25,7 +25,7 @@ namespace TH_Project.Service.DTOs.Result_Request_DTOs_ViewModel
         public string TenCongTrinh { get; set; }
         public string NoiDung { get; set; }
         public string MaHoaDon { get; set; }
-        public int GiaTri { get; set; }
+        public long GiaTri { get; set; }
         public DateTime? NgayBatDau { get; set; }
         public DateTime? NgayToiHan { get; set; } //Ngày tới hạn là ngày cho đối tác nợ
         public DateTime? NgayKetThuc { get; set; } // Ngày kết thúc là ngày mà cả 2 bên giao nhận và trả tiền thành công
@@ -40,11 +40,11 @@ namespace TH_Project.Service.DTOs.Result_Request_DTOs_ViewModel
         public string MaCongNo { get; set; } //(SO0001)
         public string TenCongTrinh { get; set; }
         public string NoiDung { get; set; }
-        public int GiaTri { get; set; }
+        public long? GiaTri { get; set; }
         public string Slug { get; set; }
         public DateTime? NgayToiHan { get; set; } //Ngày tới hạn là ngày cho đối tác nợ
         public DateTime? NgayKetThuc { get; set; } // Ngày kết thúc là ngày mà cả 2 bên giao nhận và trả tiền thành công
-        public OrderStatuses TrangThai { get; set; }
+        public OrderStatuses? TrangThai { get; set; }
         public string GhiChu { get; set; }
   }
 
@@ -54,7 +54,7 @@ namespace TH_Project.Service.DTOs.Result_Request_DTOs_ViewModel
         public string MaCongNo { get; set; } //(SO0001)
         public string TenCongTrinh { get; set; }
         public string NoiDung { get; set; }
-        public int GiaTri { get; set; }
+        public long GiaTri { get; set; }
         public string Slug { get; set; }
 
         public DateTime? NgayBatDau { get; set; }

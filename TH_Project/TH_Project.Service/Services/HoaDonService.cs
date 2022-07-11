@@ -111,6 +111,37 @@ namespace TH_Project.Service.Services
             return result;
         }
 
+        public async Task<long> CreateAsync(HoaDonEdit args)
+        {
+
+
+            var checkProd = await _context.HoaDons.Where(x => x.SoHD == args.SoHD).FirstOrDefaultAsync();
+            if (checkProd != null)
+            {
+                throw new InvalidOperationException($"Đã tồn tại công nợ có mã là :  {args.SoHD}");
+            }
+
+            var product = new HoaDon
+            {
+                IdDonHang = args.IdDonHang,
+                IdDatHang = args.IdDatHang,
+                Slug = args.Slug,
+                GiaTri = args.GiaTri,
+                Ngay = args.Ngay,
+                GhiChu = args.GhiChu,
+                BillStatus = args.BillStatus,
+                Status = Statuses.Default,
+            };
+
+            _context.HoaDons.Add(product);
+
+            await _context.SaveChangesAsync();
+
+
+            return product.Id;
+        }
+
+
         public async Task<PagedResult<HoaDonResult>>  getAllHoaDon_DatHangPaging(HoaDonRequest request, string getNotification)
         {
 
@@ -575,87 +606,84 @@ namespace TH_Project.Service.Services
         }
 
 
-        //sửa sản phẩm
-        //public async Task EditAsync(long id, DonHangEdit args)
-        //{
-        //    var product = await FetchAsync(id);
-        //    if (product == null)
-        //    {
-        //        throw new InvalidOperationException($"Đơn đặt hàng không tồn tại hoặc đã bị xóa");
-        //    }
-        //    if (args.IdNhanVien.HasValue)
-        //    {
-        //        // check bảng cha
-        //        {
-        //            var checkCate = _context.NhanViens
-        //                .AsNoTracking()
-        //                .Where(x => x.Id == args.IdNhanVien && x.Status == Statuses.Default)
-        //                .FirstOrDefault();
 
-        //            if (checkCate == null)
-        //            {
-        //                throw new InvalidOperationException($"Không tìm thấy nhân viên");
-        //            }
-        //        }
-        //    }
-        //    if (args.IdDoiTac.HasValue)
-        //    {
-        //        // check bảng cha
-        //        {
-        //            var checkCate = _context.DoiTacs
-        //                .AsNoTracking()
-        //                .Where(x => x.Id == args.IdDoiTac && x.Status == Statuses.Default)
-        //                .FirstOrDefault();
+        public async Task EditAsync(long id, HoaDonEdit args)
+        {
+            var product = await FetchAsync(id);
+            if (product == null)
+            {
+                throw new InvalidOperationException($"Hóa đơn không tồn tại hoặc đã bị xóa");
+            }
+            if (args.IdDatHang.HasValue)
+            {
+                // check bảng cha
+                {
+                    var checkCate = _context.DatHangs
+                        .AsNoTracking()
+                        .Where(x => x.Id == args.IdDatHang && x.Status == Statuses.Default)
+                        .FirstOrDefault();
 
-        //            if (checkCate == null)
-        //            {
-        //                throw new InvalidOperationException($"Không tìm thấy dối tác này");
-        //            }
-        //        }
-        //    }
+                    if (checkCate == null)
+                    {
+                        throw new InvalidOperationException($"Không tìm thấy nhân viên");
+                    }
+                }
+            }
+            if (args.IdDonHang.HasValue)
+            {
+                // check bảng cha
+                {
+                    var checkCate = _context.DonHangs
+                        .AsNoTracking()
+                        .Where(x => x.Id == args.IdDonHang && x.Status == Statuses.Default)
+                        .FirstOrDefault();
+
+                    if (checkCate == null)
+                    {
+                        throw new InvalidOperationException($"Không tìm thấy nhân viên");
+                    }
+                }
+            }
 
 
-        //    //if (!string.IsNullOrEmpty(args.ImagePath) || !string.IsNullOrWhiteSpace(args.ImagePath))
-        //    //{ product.ImagePath = args.ImagePath; }
+            //if (!string.IsNullOrEmpty(args.ImagePath) || !string.IsNullOrWhiteSpace(args.ImagePath))
+            //{ product.ImagePath = args.ImagePath; }
 
-        //    //if (!string.IsNullOrEmpty(args.VideoPath) || !string.IsNullOrWhiteSpace(args.VideoPath))
-        //    //{ product.VideoPath = args.VideoPath; }
+            //if (!string.IsNullOrEmpty(args.VideoPath) || !string.IsNullOrWhiteSpace(args.VideoPath))
+            //{ product.VideoPath = args.VideoPath; }
 
-        //    // update query for string
-        //    if (!string.IsNullOrEmpty(args.MaDonHang) || !string.IsNullOrWhiteSpace(args.MaDonHang))
-        //    {
-        //        var checkProd = await _context.DonHangs.Where(x => x.MaDonHang == args.MaDonHang && x.Id != id).FirstOrDefaultAsync();
-        //        if (checkProd != null)
-        //        {
-        //            throw new InvalidOperationException($"Đã tồn tại sản phẩm {args.MaDonHang}");
-        //        }
-        //        product.MaDonHang = args.MaDonHang;
-        //    }
+            // update query for string
+            if (!string.IsNullOrEmpty(args.SoHD) || !string.IsNullOrWhiteSpace(args.SoHD))
+            {
+                var checkProd = await _context.DonHangs.Where(x => x.MaDonHang == args.SoHD && x.Id != id).FirstOrDefaultAsync();
+                if (checkProd != null)
+                {
+                    throw new InvalidOperationException($"Đã tồn tại sản phẩm {args.SoHD}");
+                }
+                product.SoHD = args.SoHD;
+            }
 
-        //    if (!string.IsNullOrEmpty(args.TenCongTrinh) || !string.IsNullOrWhiteSpace(args.TenCongTrinh))
-        //    { product.TenCongTrinh = args.TenCongTrinh; }
-        //    if (!string.IsNullOrEmpty(args.NoiDung) || !string.IsNullOrWhiteSpace(args.NoiDung))
-        //    { product.NoiDung = args.NoiDung; }///
-        //    if (!string.IsNullOrEmpty(args.Slug) || !string.IsNullOrWhiteSpace(args.Slug))
-        //    { product.Slug = args.Slug; }
-        //    if (!string.IsNullOrEmpty(args.GhiChu) || !string.IsNullOrWhiteSpace(args.GhiChu))
-        //    { product.GhiChu = args.GhiChu; }
 
-        //    //update query for int 
-        //    if (args.GiaTri != null) { product.GiaTri = args.GiaTri; }
-        //    if (args.NgayBatDau.HasValue) { product.NgayBatDau = args.NgayBatDau.Value; }
-        //    if (args.NgayGiaoHang.HasValue) { product.NgayGiaoHang = args.NgayGiaoHang.Value; }
-        //    if (args.TrangThai != null) { product.TrangThai = args.TrangThai; }
+            //update query for string
+            if (!string.IsNullOrEmpty(args.GhiChu) || !string.IsNullOrWhiteSpace(args.GhiChu))
+            { product.GhiChu = args.GhiChu; }
 
-        //    // update kể cả khi request truyền null 
-        //    _context.Entry(product).State = EntityState.Modified;
-        //    await _context.SaveChangesAsync();
+            //update query for int 
+            if (args.GiaTri != null) { product.GiaTri = args.GiaTri; }
+            if (args.IdDonHang.HasValue) { product.IdDatHang = args.IdDatHang.Value; }
+            if (args.IdDatHang.HasValue) { product.IdDatHang = args.IdDatHang.Value; }
+            if (args.BillStatus != null) { product.BillStatus = args.BillStatus; }
+            if (args.Ngay != null) { product.Ngay = args.Ngay; }
 
-        //    //await versionService.NewVersion(ObjectVersions.Product, product.Id);
+            // update kể cả khi request truyền null 
+            _context.Entry(product).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            //await versionService.NewVersion(ObjectVersions.Product, product.Id);
 
 
 
-        //}
+        }
 
 
 

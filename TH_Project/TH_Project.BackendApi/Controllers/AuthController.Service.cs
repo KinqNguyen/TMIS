@@ -27,6 +27,11 @@ namespace Stump.Api.Controllers.Admin
         {
             var employee = await this.context.NhanViens.Where(e => e.LoginName == args.LoginName && e.Status == Statuses.Default).FirstOrDefaultAsync();
 
+            if (employee == null)
+            {
+                throw new InvalidOperationException($"Sai thông tin đăng nhập");
+            }
+
             if (employee.Password.ToLower() != args.Password.ToSha256().ToLower())
             {
                 throw new InvalidOperationException($"Sai thông tin đăng nhập");

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.ViewModel\\TH_Project.ViewModel.csproj": {}
+    "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.ViewModel\\TH_Project.ViewModel.csproj": {}
   },
   "projects": {
-    "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.ViewModel\\TH_Project.ViewModel.csproj": {
+    "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.ViewModel\\TH_Project.ViewModel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.ViewModel\\TH_Project.ViewModel.csproj",
+        "projectUniqueName": "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.ViewModel\\TH_Project.ViewModel.csproj",
         "projectName": "TH_Project.ViewModel",
-        "projectPath": "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.ViewModel\\TH_Project.ViewModel.csproj",
+        "projectPath": "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.ViewModel\\TH_Project.ViewModel.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\TH_Company\\New folder\\TH_Project\\TH_Project.ViewModel\\obj\\",
+        "outputPath": "D:\\TH_Company\\TMIS\\TH_Project\\TH_Project.ViewModel\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -54,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

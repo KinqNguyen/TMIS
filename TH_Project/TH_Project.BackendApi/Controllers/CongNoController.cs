@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,6 @@ namespace TH_Project.BackendApi.Controllers
     [ApiController]
     [Route("CongNo")]
 
-
     public class CongNoController : ControllerBase
     {
         private readonly ICongNoService _donHangService;
@@ -22,7 +22,20 @@ namespace TH_Project.BackendApi.Controllers
 
             _donHangService = DonHangService;
         }
+        [Authorize]
 
+        [HttpGet]
+        [Route("all-private")]
+        public async Task<PagedResult<CongNoResult>> GetCongNoPriAsync(string getNotification, [FromQuery] CongNoRequest request)
+        {
+
+            //{
+            //    var identity = HttpContext.User.Identity as ClaimsIdentity;
+            //    var userID = identity.Claims.Where(e => e.Type == ClaimTypes.Name).FirstOrDefault().Value;
+            //    await dbContext.CheckPermissionAsync(1, long.Parse(userID)); // 1 - xem
+            //} 
+            return await _donHangService.getAllCongNoPaging(request, getNotification);
+        }
 
         [HttpGet]
         [Route("all")]

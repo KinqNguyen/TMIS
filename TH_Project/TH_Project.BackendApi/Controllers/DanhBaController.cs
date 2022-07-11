@@ -54,6 +54,57 @@ namespace TH_Project.BackendApi.Controllers
 
 
 
+
+        [HttpPost]
+        [Route("create-nhanvien")]
+        [DisableRequestSizeLimit]
+        public async Task<long> CreateProductAsync([FromForm] DanhBaNhanVienCreate args)
+        {
+
+            return await _donHangService.CreateNhanVienAsync(args);
+
+
+            //string imagePath = args.image != null ? this.env.SaveFile(args.image) : null;
+            //string videoPath = args.video != null ? this.env.SaveFile(args.video) : null;
+
+            //await productService.CreateAsync(new CreateProductArgs
+            //{
+            //    Name = args.name,
+            //    Description = args.description,
+            //    CategoryID = args.categoryId,
+            //    ImagePath = imagePath,
+            //    VideoPath = videoPath,
+            //    UnitPrice = args.unitPrice,
+            //});
+        }
+
+
+        [HttpPost]
+        [Route("create-doitac")]
+        [DisableRequestSizeLimit]
+        public async Task<long> CreateDoiTacAsync([FromForm] DanhBaDoiTacCreate args)
+        {
+
+            return await _donHangService.CreateDoiTacAsync(args);
+
+
+            //string imagePath = args.image != null ? this.env.SaveFile(args.image) : null;
+            //string videoPath = args.video != null ? this.env.SaveFile(args.video) : null;
+
+            //await productService.CreateAsync(new CreateProductArgs
+            //{
+            //    Name = args.name,
+            //    Description = args.description,
+            //    CategoryID = args.categoryId,
+            //    ImagePath = imagePath,
+            //    VideoPath = videoPath,
+            //    UnitPrice = args.unitPrice,
+            //});
+        }
+
+
+
+
         [HttpGet]
         [Route("all/NhanVien")]
         public async Task<PagedResult<DanhBaResult>> GetDanhbaNhanVienAsync([FromQuery] DanhBaRequest request)

@@ -183,6 +183,62 @@ namespace TH_Project.Service.Services
         }
 
 
+        public async Task CreateDoiTacAsync(DonHangEdit args)
+        {
+            {
+                // check hóa đơn
+                {
+                    var checkCate = _context.DoiTacs
+                        .AsNoTracking()
+                        .Where(x => x.Id == args.IdDoiTac && x.Status == Statuses.Default)
+                        .FirstOrDefault();
+
+                    if (checkCate == null)
+                    {
+                        throw new InvalidOperationException($"Không tìm thấy Doi Tac ");
+                    }
+                }
+            }
+
+            {
+                // check hóa đơn
+                {
+                    var checkCate = _context.NhanViens
+                        .AsNoTracking()
+                        .Where(x => x.Id == args.IdNhanVien && x.Status == Statuses.Default)
+                        .FirstOrDefault();
+
+                    if (checkCate == null)
+                    {
+                        throw new InvalidOperationException($"Không tìm thấy Nhan Vien ");
+                    }
+                }
+            }
+            var prod = await _context.DonHangs.OrderByDescending(x => x.Id).AsNoTracking().Where(x => x.Status != Statuses.Deleted).FirstOrDefaultAsync();
+            long bro = prod.Id + 1;
+
+            var product = new DatHang
+            {
+                IdDoiTac = args.IdDoiTac.Value,
+                IdNhanVien = args.IdNhanVien.Value,
+                MaDonHang = "P_0000_" + bro,
+                TenCongTrinh = args.TenCongTrinh,
+                NoiDung = args.NoiDung,
+                GiaTri = args.GiaTri,
+                NgayBatDau = args.NgayBatDau,
+                Slug = args.Slug,
+                NgayGiaoHang = args.NgayGiaoHang,
+                GhiChu = args.GhiChu,
+                Status = Statuses.Default,
+                TrangThai = args.TrangThai,
+            };
+
+            _context.DatHangs.Add(product);
+
+            await _context.SaveChangesAsync();
+
+        }
+
         //sửa sản phẩm
         public async Task EditAsync(long id, DonHangEdit args)
         {

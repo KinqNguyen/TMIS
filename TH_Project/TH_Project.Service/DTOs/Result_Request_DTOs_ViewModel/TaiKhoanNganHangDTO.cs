@@ -80,4 +80,16 @@ namespace TH_Project.Service.DTOs.Result_Request_DTOs_ViewModel
         public string Slug { get; set; }
     }
 
+
+    public class TaiKhoanNganHangEdit
+    {
+        public long? IdNhanVIen { get; set; }
+        public long? IdDoiTac { get; set; }
+        public string STK { get; set; }
+        public string Ten { get; set; }
+        public string DiaChiNH { get; set; }
+        public string GhiChu { get; set; }
+        public string Slug { get; set; }
+    }
+
 }

@@ -38,4 +38,16 @@ namespace TH_Project.Service.DTOs.Result_Request_DTOs_ViewModel
         public IOStatuses IOStatuses { get; set; } //in out status
         public Statuses Status { get; set; }
     }
+
+    public class QuyTienMatEdit
+    {
+        public long? IdHoaDon { get; set; }
+        public long? IdNhanVien { get; set; } //Nguoi thuc hien
+        public string TenCongTy { get; set; }
+        public DateTime? Ngay { get; set; }
+        public string Slug { get; set; }
+        public string NoiDung { get; set; }
+        public IOStatuses IOStatuses { get; set; } //in out status
+
+    }
 }
